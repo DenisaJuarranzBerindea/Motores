@@ -55,6 +55,7 @@ public class BulletMovement : MonoBehaviour
     public void Setup(Vector2 direction)
     {
         _speed = new Vector3(direction.x, direction.y, 0f);
+        _speed.Normalize();
         _speed *= _speedValue;
     }
     /// <summary>

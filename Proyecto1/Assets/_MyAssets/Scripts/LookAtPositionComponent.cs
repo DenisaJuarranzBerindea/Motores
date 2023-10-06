@@ -17,7 +17,7 @@ public class LookAtPositionComponent : MonoBehaviour
     /// Point to look at
     /// </summary>
     #region properties
-    private Vector3 _lookAtPosition;
+    private Vector3 _lookAtPosition = Vector3.up;       // CAMBIAR POR PREGUNTA
     #endregion
     #region methods
     public void SetLookAtPosition(Vector3 mousePosition)

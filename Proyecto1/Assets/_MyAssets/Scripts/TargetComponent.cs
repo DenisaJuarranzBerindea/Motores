@@ -9,6 +9,7 @@ public class TargetComponent : MonoBehaviour
     /// </summary>
     private GameManager _gameManager;
     #endregion
+
     #region methods
     /// <summary>
     /// Method to detect if a bullet reaches the target and inform the GameManager
@@ -16,7 +17,12 @@ public class TargetComponent : MonoBehaviour
     /// <param name="collision">Colliding object</param>
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        //TODO
+        BulletMovement bulletMovement = collision.GetComponent<BulletMovement>();
+
+        if (bulletMovement != null)
+        {
+            _gameManager.OnTargetReached();
+        }
 
     }
     #endregion
@@ -25,7 +31,6 @@ public class TargetComponent : MonoBehaviour
     /// </summary>
     void Start()
     {
-        //TODO
-
+        _gameManager = FindObjectOfType<GameManager>();
     }
 }

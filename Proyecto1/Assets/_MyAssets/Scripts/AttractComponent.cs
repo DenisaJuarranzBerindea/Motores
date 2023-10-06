@@ -8,7 +8,7 @@ public class AttractComponent : MonoBehaviour
     /// Parameter to regulate the attraction speed of the attraction area
     /// </summary>
     [SerializeField]
-    private float _attraction;
+    private float _attraction = 1.0f;
     #endregion
     #region references
     /// <summary>
@@ -24,7 +24,14 @@ public class AttractComponent : MonoBehaviour
     /// <param name="collision">Collided object</param>
     private void OnTriggerStay2D(Collider2D collision)
     {
-        //TODO
+        BulletMovement bullet = collision.gameObject.GetComponent<BulletMovement>();
+
+        if (bullet != null)
+        {
+            Vector3 attractionDirection = (_myTransform.position - bullet.transform.position).normalized;
+
+            bullet.AddSpeed(attractionDirection * _attraction);
+        }
 
     }
 
@@ -34,7 +41,7 @@ public class AttractComponent : MonoBehaviour
     /// </summary>
     void Start()
     {
-        //TODO
+        _myTransform = transform;
 
     }
 }

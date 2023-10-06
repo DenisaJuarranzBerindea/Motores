@@ -12,12 +12,18 @@ public class ReboundComponent : MonoBehaviour
     /// <param name="collision"></param>
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        
         BulletMovement bullet = collision.gameObject.GetComponent<BulletMovement>();
-        print("ouch");
+
         if(bullet != null)
         {
-            print(collision.GetContact(0).normal);
+            Vector3 normal = collision.GetContact(0).normal;
+
+            Vector3 reflexion = bullet.Speed.normalized - 2 * Vector3.Dot(bullet.Speed.normalized, normal) * normal;
+
+            bullet.SetDirection(reflexion.normalized);
         }
+        
     }
     #endregion
 }
