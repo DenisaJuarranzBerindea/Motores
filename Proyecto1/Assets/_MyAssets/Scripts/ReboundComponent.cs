@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.ReorderableList;
 using UnityEngine;
 public class ReboundComponent : MonoBehaviour
 {
@@ -17,11 +18,26 @@ public class ReboundComponent : MonoBehaviour
 
         if(bullet != null)
         {
+
             Vector3 normal = collision.GetContact(0).normal;
 
-            Vector3 reflexion = bullet.Speed.normalized - 2 * Vector3.Dot(bullet.Speed.normalized, normal) * normal;
+            // Metodo 1:
 
-            bullet.SetDirection(reflexion.normalized);
+            Vector3 wall = Vector3.Cross(Vector3.forward, normal);
+
+            float cWall = Vector3.Dot(wall, bullet.Speed.normalized);
+            float cNormal = -1 * Vector3.Dot(bullet.Speed.normalized, normal);
+
+            Vector3 reflexion1 = cWall * wall + cNormal * normal;
+
+            bullet.SetDirection(reflexion1.normalized);
+
+
+            // Método 2:
+
+            //Vector3 reflexion2 = bullet.Speed.normalized - 2 * Vector3.Dot(bullet.Speed.normalized, normal) * normal;
+
+            //bullet.SetDirection(reflexion2.normalized);
         }
         
     }
