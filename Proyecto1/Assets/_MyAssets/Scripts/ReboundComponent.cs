@@ -19,16 +19,16 @@ public class ReboundComponent : MonoBehaviour
         if(bullet != null)
         {
 
-            Vector3 normal = collision.GetContact(0).normal;
+            Vector3 normal = collision.GetContact(0).normal; // Normal dirección al muro
 
             // Metodo 1:
 
             Vector3 wall = Vector3.Cross(Vector3.forward, normal);
 
             float cWall = Vector3.Dot(wall, bullet.Speed.normalized);
-            float cNormal = -1 * Vector3.Dot(bullet.Speed.normalized, normal);
+            float cNormal = Vector3.Dot(bullet.Speed.normalized, normal);
 
-            Vector3 reflexion1 = cWall * wall + cNormal * normal;
+            Vector3 reflexion1 = cWall * wall + (cNormal * normal * -1);
 
             bullet.SetDirection(reflexion1.normalized);
 
