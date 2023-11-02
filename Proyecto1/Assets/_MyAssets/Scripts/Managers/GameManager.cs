@@ -56,7 +56,6 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         _inputManager = GetComponent<InputManager>();
-        //???
         _gameManager = GetComponent<GameManager>();
         _UIManager = GetComponent<UIManager>();
 
